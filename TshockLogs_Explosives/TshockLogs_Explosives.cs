@@ -80,10 +80,15 @@ namespace TshockLogs
                 TSPlayer player = TShock.Players[args.Owner];
                 if (ExplosivesConfig.ShowOnConsole)
                 {
-                    Console.WriteLine("{0} throws {1} at ({2},{3})", player.Name, explosiveName, args.Position.X, args.Position.Y);
+                    //Console.WriteLine("{0} throws {1} at ({2},{3})", player.Name, explosiveName, args.Position.X, args.Position.Y); 
+                    /*logged position is the player's position at the time the projectile is created by the player
+                    while ideally it should be the position of the projectile, I have no idea how to do that
+                    also in the log it incorrectly shows pos as 16x of the actual player pos
+                    changing Position.X to player.TileX outputs an understandable and accurate pos value that matches the /pos command */
+                    Console.WriteLine("{0} throws {1} at ({2},{3})", player.Name, explosiveName, player.TileX, player.TileY);
                 }
                 
-                TShock.Log.Info("{0} throws {1} at ({2},{3})", player.Name, explosiveName, args.Position.X, args.Position.Y);
+                TShock.Log.Info("{0} throws {1} at ({2},{3})", player.Name, explosiveName, player.TileX, player.TileY);
             }
             
         }
